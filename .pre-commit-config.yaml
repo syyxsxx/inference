@@ -1,0 +1,35 @@
+repos:
+-   repo: https://github.com/syyxsxx/mirrors-yapf.git
+    rev: 41eff28d09549517ff5017d06b6eb353470e4acb
+    hooks:
+    -   id: yapf
+        files: \.py$
+
+-   repo: https://github.com/syyxsxx/pre-commit-hooks.git
+    rev: 6e2418c5521b7d606e72914dced3253f9ace1205
+    hooks:
+    -   id: check-merge-conflict
+    -   id: check-symlinks
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+    -   id: detect-private-key
+    -   id: check-symlinks
+    -   id: check-added-large-files
+
+-   repo: local
+    hooks:
+    -   id: clang-format-with-version-check
+        name: clang-format
+        description: Format files with ClangFormat.
+        entry: bash ./tools/codestyle/clang_format.hook -i
+        language: system
+        files: \.(c|cc|cxx|cpp|cu|h|hpp|hxx|proto)$
+
+-   repo: local
+    hooks:
+    -   id: cpplint-cpp-source
+        name: cpplint
+        description: Check C++ code style using cpplint.py.
+        entry: bash ./tools/codestyle/cpplint_pre_commit.hook
+        language: system
+        files: \.(c|cc|cxx|cpp|cu|h|hpp|hxx)$
